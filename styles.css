@@ -99,9 +99,10 @@ h3 {
 }
 
 .brand-logo {
-  height: 120px;
+  height: 200px;
   width: auto;
   display: block;
+  object-fit: contain;
 }
 
 .nav {
