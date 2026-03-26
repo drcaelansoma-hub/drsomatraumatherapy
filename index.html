@@ -50,15 +50,20 @@
             <p class="hero-credential">
               <span class="hero-credential-name">Dr. Caelan Soma</span>, clinical psychologist
             </p>
-            <!--
-              Submissions: opens the visitor’s email app with a pre-filled message to you.
-              To receive forms in your inbox without mailto, sign up at https://formspree.io,
-              create a form, then set <form action="https://formspree.io/f/YOUR_ID" method="POST">
-              and remove the submit handler in the script at the bottom of this page.
-            -->
+            <!-- Consultation form → Formspree: https://formspree.io/f/xjgpvoag -->
             <div class="hero-form-wrap">
-              <form id="hero-consult-form" class="hero-form" action="#" method="get">
+              <form
+                id="hero-consult-form"
+                class="hero-form"
+                action="https://formspree.io/f/xjgpvoag"
+                method="POST"
+              >
                 <div class="hero-form-fields" id="hero-form-fields">
+                  <input type="hidden" name="_subject" value="Free consultation request" />
+                  <p class="hero-form-preface">
+                    This is a good place to start if you're feeling stuck, overwhelmed, or ready
+                    for something to shift.
+                  </p>
                   <div class="hero-form-intro">
                     <p>
                       Start here if you'd like to schedule a free consultation.<br />
@@ -66,8 +71,7 @@
                     </p>
                   </div>
                   <p class="hero-form-helper">
-                    Submitting opens your email app with a draft you can edit before sending. I
-                    only use your contact details to reply to you.
+                    Your message is sent securely. I only use your details to reply to you.
                   </p>
                   <div class="form-field">
                     <label for="hero-consult-name">Name</label>
@@ -96,15 +100,19 @@
                       id="hero-consult-message"
                       name="message"
                       rows="4"
-                      placeholder="Optional — share only what feels right."
+                      placeholder="Optional — share only what feels comfortable."
                     ></textarea>
                   </div>
                   <button type="submit" class="button primary hero-form-submit">
                     Schedule Your Free Consultation
                   </button>
-                  <p class="hero-form-reassurance">
-                    I typically respond within 24 hours.
-                  </p>
+                  <p id="hero-form-error" class="hero-form-error" hidden role="alert"></p>
+                  <div class="hero-form-footer-notes">
+                    <p class="hero-form-reassurance">I typically respond within 24 hours.</p>
+                    <p class="hero-form-reassurance">
+                      Your information is kept private and only used to respond to your message.
+                    </p>
+                  </div>
                 </div>
               </form>
               <div
@@ -117,7 +125,7 @@
               >
                 <p class="hero-form-success-title">Thank you — I’ll be in touch soon.</p>
                 <p class="hero-form-success-note">
-                  If your email app didn’t open, you can reach me at
+                  If you need anything else, you’re welcome to email
                   <a href="mailto:drcaelansoma@gmail.com">drcaelansoma@gmail.com</a>.
                 </p>
               </div>
@@ -423,37 +431,80 @@
       const consultForm = document.getElementById("hero-consult-form");
       const heroFormFields = document.getElementById("hero-form-fields");
       const heroFormSuccess = document.getElementById("hero-form-success");
+      const heroFormError = document.getElementById("hero-form-error");
+      const submitBtn = consultForm ? consultForm.querySelector(".hero-form-submit") : null;
 
       if (consultForm && heroFormFields && heroFormSuccess) {
-        consultForm.addEventListener("submit", function (e) {
+        consultForm.addEventListener("submit", async function (e) {
           e.preventDefault();
           if (!consultForm.checkValidity()) {
             consultForm.reportValidity();
             return;
           }
 
-          const name = document.getElementById("hero-consult-name").value.trim();
-          const email = document.getElementById("hero-consult-email").value.trim();
-          const message = document.getElementById("hero-consult-message").value.trim();
+          if (heroFormError) {
+            heroFormError.textContent = "";
+            heroFormError.setAttribute("hidden", "");
+          }
 
-          const subject = encodeURIComponent("Free consultation request");
-          const messageBlock =
-            message.length > 0
-              ? message
-              : "(No additional message — visitor preferred to connect by email only.)";
-          const body = encodeURIComponent(
-            "Name: " + name + "\n" + "Email: " + email + "\n\n" + "Message:\n" + messageBlock
-          );
+          const originalLabel = submitBtn ? submitBtn.textContent : "";
+          if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.textContent = "Sending…";
+          }
 
-          heroFormFields.setAttribute("hidden", "");
-          heroFormSuccess.removeAttribute("hidden");
-          heroFormSuccess.focus();
-          heroFormSuccess.scrollIntoView({ behavior: "smooth", block: "nearest" });
+          try {
+            const formData = new FormData(consultForm);
+            const response = await fetch(consultForm.action, {
+              method: "POST",
+              body: formData,
+              headers: { Accept: "application/json" },
+            });
 
-          window.setTimeout(function () {
-            window.location.href =
-              "mailto:drcaelansoma@gmail.com?subject=" + subject + "&body=" + body;
-          }, 350);
+            let data = {};
+            try {
+              data = await response.json();
+            } catch (parseErr) {
+              data = {};
+            }
+
+            if (response.ok) {
+              heroFormFields.setAttribute("hidden", "");
+              heroFormSuccess.removeAttribute("hidden");
+              heroFormSuccess.focus();
+              heroFormSuccess.scrollIntoView({ behavior: "smooth", block: "nearest" });
+              return;
+            }
+
+            var errMsg =
+              "Something went wrong. Please try again in a moment, or email drcaelansoma@gmail.com.";
+            if (data && typeof data.error === "string") {
+              errMsg = data.error;
+            } else if (data && data.errors && typeof data.errors === "object") {
+              var firstKey = Object.keys(data.errors)[0];
+              var firstVal = firstKey ? data.errors[firstKey] : null;
+              if (Array.isArray(firstVal) && firstVal[0]) {
+                errMsg = firstVal[0];
+              } else if (typeof firstVal === "string") {
+                errMsg = firstVal;
+              }
+            }
+            if (heroFormError) {
+              heroFormError.textContent = errMsg;
+              heroFormError.removeAttribute("hidden");
+            }
+          } catch (err) {
+            if (heroFormError) {
+              heroFormError.textContent =
+                "Something went wrong. Please try again in a moment, or email drcaelansoma@gmail.com.";
+              heroFormError.removeAttribute("hidden");
+            }
+          } finally {
+            if (submitBtn) {
+              submitBtn.disabled = false;
+              submitBtn.textContent = originalLabel;
+            }
+          }
         });
       }
     </script>
