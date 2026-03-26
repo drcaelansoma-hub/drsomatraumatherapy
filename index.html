@@ -44,50 +44,84 @@
               A nervous system–based approach to trauma therapy that helps you process and move
               forward—without forcing yourself to “just think differently.”
             </p>
+            <p class="hero-trust">
+              Virtual sessions for adults in California · EMDR and trauma-informed therapy
+            </p>
+            <p class="hero-credential">
+              <span class="hero-credential-name">Dr. Caelan Soma</span>, clinical psychologist
+            </p>
             <!--
               Submissions: opens the visitor’s email app with a pre-filled message to you.
               To receive forms in your inbox without mailto, sign up at https://formspree.io,
               create a form, then set <form action="https://formspree.io/f/YOUR_ID" method="POST">
               and remove the submit handler in the script at the bottom of this page.
             -->
-            <form id="hero-consult-form" class="hero-form" action="#" method="get">
-              <p class="hero-form-intro">
-                Start here if you’d like to schedule a free consultation.
-              </p>
-              <div class="form-field">
-                <label for="hero-consult-name">Name</label>
-                <input
-                  id="hero-consult-name"
-                  name="name"
-                  type="text"
-                  autocomplete="name"
-                  required
-                />
+            <div class="hero-form-wrap">
+              <form id="hero-consult-form" class="hero-form" action="#" method="get">
+                <div class="hero-form-fields" id="hero-form-fields">
+                  <div class="hero-form-intro">
+                    <p>
+                      Start here if you'd like to schedule a free consultation.<br />
+                      You can share as much or as little as feels comfortable.
+                    </p>
+                  </div>
+                  <p class="hero-form-helper">
+                    Submitting opens your email app with a draft you can edit before sending. I
+                    only use your contact details to reply to you.
+                  </p>
+                  <div class="form-field">
+                    <label for="hero-consult-name">Name</label>
+                    <input
+                      id="hero-consult-name"
+                      name="name"
+                      type="text"
+                      autocomplete="name"
+                      required
+                    />
+                  </div>
+                  <div class="form-field">
+                    <label for="hero-consult-email">Email</label>
+                    <input
+                      id="hero-consult-email"
+                      name="email"
+                      type="email"
+                      autocomplete="email"
+                      inputmode="email"
+                      required
+                    />
+                  </div>
+                  <div class="form-field">
+                    <label for="hero-consult-message">What are you hoping for support with? (optional)</label>
+                    <textarea
+                      id="hero-consult-message"
+                      name="message"
+                      rows="4"
+                      placeholder="Optional — share only what feels right."
+                    ></textarea>
+                  </div>
+                  <button type="submit" class="button primary hero-form-submit">
+                    Schedule Your Free Consultation
+                  </button>
+                  <p class="hero-form-reassurance">
+                    I typically respond within 24 hours.
+                  </p>
+                </div>
+              </form>
+              <div
+                id="hero-form-success"
+                class="hero-form-success"
+                hidden
+                role="status"
+                aria-live="polite"
+                tabindex="-1"
+              >
+                <p class="hero-form-success-title">Thank you — I’ll be in touch soon.</p>
+                <p class="hero-form-success-note">
+                  If your email app didn’t open, you can reach me at
+                  <a href="mailto:drcaelansoma@gmail.com">drcaelansoma@gmail.com</a>.
+                </p>
               </div>
-              <div class="form-field">
-                <label for="hero-consult-email">Email</label>
-                <input
-                  id="hero-consult-email"
-                  name="email"
-                  type="email"
-                  autocomplete="email"
-                  inputmode="email"
-                  required
-                />
-              </div>
-              <div class="form-field">
-                <label for="hero-consult-message">Brief message</label>
-                <textarea
-                  id="hero-consult-message"
-                  name="message"
-                  rows="4"
-                  required
-                ></textarea>
-              </div>
-              <button type="submit" class="button primary hero-form-submit">
-                Schedule a Free Consultation
-              </button>
-            </form>
+            </div>
 
             <div class="hero-below-form">
               <p>You don’t have to push through or figure this out on your own.</p>
@@ -387,7 +421,10 @@
       }
 
       const consultForm = document.getElementById("hero-consult-form");
-      if (consultForm) {
+      const heroFormFields = document.getElementById("hero-form-fields");
+      const heroFormSuccess = document.getElementById("hero-form-success");
+
+      if (consultForm && heroFormFields && heroFormSuccess) {
         consultForm.addEventListener("submit", function (e) {
           e.preventDefault();
           if (!consultForm.checkValidity()) {
@@ -400,12 +437,23 @@
           const message = document.getElementById("hero-consult-message").value.trim();
 
           const subject = encodeURIComponent("Free consultation request");
+          const messageBlock =
+            message.length > 0
+              ? message
+              : "(No additional message — visitor preferred to connect by email only.)";
           const body = encodeURIComponent(
-            "Name: " + name + "\n" + "Email: " + email + "\n\n" + "Message:\n" + message
+            "Name: " + name + "\n" + "Email: " + email + "\n\n" + "Message:\n" + messageBlock
           );
 
-          window.location.href =
-            "mailto:drcaelansoma@gmail.com?subject=" + subject + "&body=" + body;
+          heroFormFields.setAttribute("hidden", "");
+          heroFormSuccess.removeAttribute("hidden");
+          heroFormSuccess.focus();
+          heroFormSuccess.scrollIntoView({ behavior: "smooth", block: "nearest" });
+
+          window.setTimeout(function () {
+            window.location.href =
+              "mailto:drcaelansoma@gmail.com?subject=" + subject + "&body=" + body;
+          }, 350);
         });
       }
     </script>

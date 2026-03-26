@@ -169,28 +169,72 @@ h3 {
 .hero--above-fold .hero-body {
   font-size: clamp(1rem, 1.35vw, 1.125rem);
   line-height: 1.55;
-  margin: 0 0 1.25rem;
+  margin: 0 0 0.65rem;
+}
+
+.hero-trust {
+  margin: 0 0 0.5rem;
+  font-size: clamp(0.82rem, 1.05vw, 0.9rem);
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  color: #6b7280;
+  text-align: center;
+}
+
+.hero-credential {
+  margin: 0 0 1.85rem;
+  font-size: clamp(0.85rem, 1.08vw, 0.93rem);
+  line-height: 1.45;
+  letter-spacing: 0.03em;
+  color: var(--muted-text);
+  text-align: center;
+}
+
+.hero-credential-name {
+  font-weight: 500;
+  color: var(--text);
+}
+
+.hero-form-helper {
+  margin: 0 0 1.35rem;
+  padding: 0 0.25rem;
+  font-size: 0.76rem;
+  line-height: 1.55;
+  color: #8b9099;
+  text-align: center;
 }
 
 .hero--above-fold .hero-actions {
   margin: 0;
 }
 
-.hero-form {
-  margin-top: 1.5rem;
+.hero-form-wrap {
   width: 100%;
   max-width: min(26.5rem, 100%);
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0.35rem;
+}
+
+.hero-form {
+  margin-top: 0;
+  width: 100%;
+  max-width: 100%;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
 }
 
 .hero-form-intro {
-  margin: 0 0 1.4rem;
-  font-size: 0.92rem;
-  line-height: 1.55;
-  color: var(--muted-text);
+  margin: 0 0 1.65rem;
   text-align: center;
+}
+
+.hero-form-intro p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--muted-text);
 }
 
 .form-field {
@@ -198,22 +242,24 @@ h3 {
   flex-direction: column;
   align-items: stretch;
   width: 100%;
-  margin-bottom: 1.35rem;
+  margin-bottom: 1.55rem;
 }
 
 .form-field:last-of-type {
-  margin-bottom: 1.1rem;
+  margin-bottom: 1.55rem;
 }
 
 .form-field label {
   display: block;
   align-self: center;
-  margin-bottom: 0.5rem;
-  font-size: 0.8rem;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  color: var(--muted-text);
+  margin-bottom: 0.45rem;
+  max-width: 100%;
+  font-size: 0.74rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  color: #6b7280;
   text-align: center;
+  line-height: 1.4;
 }
 
 .form-field input,
@@ -265,14 +311,81 @@ h3 {
 button.hero-form-submit.button {
   width: 100%;
   max-width: 100%;
-  margin-top: 0.5rem;
-  padding-top: 0.85rem;
-  padding-bottom: 0.85rem;
+  margin-top: 0.25rem;
+  min-height: 3rem;
+  padding: 0.9rem 1.25rem;
   border: 1px solid transparent;
   border-radius: var(--radius-pill);
   cursor: pointer;
   font-family: inherit;
   font-size: 0.95rem;
+  font-weight: 500;
+  color: #fdfaf5;
+  box-shadow: 0 10px 28px rgba(21, 45, 75, 0.22);
+}
+
+.hero-form .button.primary:hover {
+  box-shadow: 0 12px 32px rgba(21, 45, 75, 0.26);
+}
+
+.hero-form .button.primary:active {
+  transform: translateY(0);
+  box-shadow: 0 8px 22px rgba(21, 45, 75, 0.2);
+}
+
+.hero-form-reassurance {
+  margin: 0.85rem 0 0;
+  font-size: 0.76rem;
+  line-height: 1.5;
+  color: #6b7280;
+  font-weight: 400;
+}
+
+.hero-form-success {
+  padding: 1.25rem 1rem;
+  text-align: center;
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(210, 199, 186, 0.55);
+  box-shadow: var(--shadow-soft);
+}
+
+.hero-form-success[hidden] {
+  display: none !important;
+}
+
+.hero-form-success-title {
+  margin: 0 0 0.5rem;
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--text);
+  line-height: 1.45;
+}
+
+.hero-form-success-note {
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: var(--muted-text);
+}
+
+.hero-form-success-note a {
+  color: var(--accent-dark);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.hero-form-success:focus {
+  outline: none;
+}
+
+.hero-form-success:focus-visible {
+  outline: 2px solid rgba(42, 90, 140, 0.35);
+  outline-offset: 3px;
+}
+
+.hero-form-fields[hidden] {
+  display: none !important;
 }
 
 .hero-below-form {
@@ -591,6 +704,48 @@ button.hero-form-submit.button {
 
   .button {
     width: 100%;
+  }
+
+  .hero--above-fold .hero-body {
+    margin-bottom: 0.6rem;
+  }
+
+  .hero-trust {
+    margin-bottom: 0.4rem;
+    padding: 0 0.15rem;
+  }
+
+  .hero-credential {
+    margin-bottom: 1.5rem;
+    font-size: 0.84rem;
+  }
+
+  .hero-form-helper {
+    margin-bottom: 1.2rem;
+    font-size: 0.74rem;
+  }
+
+  .hero-form-intro {
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-form-wrap {
+    max-width: 100%;
+  }
+
+  .form-field input,
+  .form-field textarea {
+    font-size: 16px;
+  }
+
+  button.hero-form-submit.button {
+    min-height: 2.875rem;
+    padding-top: 0.95rem;
+    padding-bottom: 0.95rem;
+  }
+
+  .hero-form-success {
+    padding: 1.15rem 0.85rem;
   }
 }
 
