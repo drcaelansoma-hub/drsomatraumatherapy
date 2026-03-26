@@ -136,11 +136,197 @@ h3 {
   padding: 5.5rem 0 4.5rem;
 }
 
+.hero--above-fold {
+  padding: clamp(1rem, 4vh, 2rem) 0 clamp(1.25rem, 3vh, 2rem);
+  min-height: calc(100svh - 14rem);
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.hero--above-fold .hero-inner {
+  width: 100%;
+}
+
 .hero-inner {
   display: grid;
   grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
   gap: 2.8rem;
   align-items: center;
+}
+
+.hero--above-fold .hero-inner {
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 40rem;
+}
+
+.hero--above-fold h1 {
+  font-size: clamp(1.85rem, 4.2vw, 2.75rem);
+  line-height: 1.12;
+  margin: 0 0 0.85rem;
+}
+
+.hero--above-fold .hero-body {
+  font-size: clamp(1rem, 1.35vw, 1.125rem);
+  line-height: 1.55;
+  margin: 0 0 1.25rem;
+}
+
+.hero--above-fold .hero-actions {
+  margin: 0;
+}
+
+.hero-form {
+  margin-top: 1.5rem;
+  width: 100%;
+  max-width: min(26.5rem, 100%);
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.hero-form-intro {
+  margin: 0 0 1.4rem;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--muted-text);
+  text-align: center;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  margin-bottom: 1.35rem;
+}
+
+.form-field:last-of-type {
+  margin-bottom: 1.1rem;
+}
+
+.form-field label {
+  display: block;
+  align-self: center;
+  margin-bottom: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--muted-text);
+  text-align: center;
+}
+
+.form-field input,
+.form-field textarea {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0.95rem 1.15rem;
+  font-size: 16px;
+  line-height: 1.5;
+  font-family: inherit;
+  color: var(--text);
+  text-align: left;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(180, 175, 168, 0.45);
+  border-radius: var(--radius-lg);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.65);
+  transition: border-color 0.2s ease-out, box-shadow 0.2s ease-out, background 0.2s ease-out;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.form-field input::placeholder,
+.form-field textarea::placeholder {
+  color: #9ca3af;
+  opacity: 1;
+}
+
+.form-field input:hover,
+.form-field textarea:hover {
+  border-color: rgba(160, 155, 148, 0.55);
+  background: rgba(255, 255, 255, 0.88);
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
+  outline: none;
+  border-color: rgba(42, 90, 140, 0.45);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(42, 90, 140, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.form-field textarea {
+  min-height: 7rem;
+  resize: vertical;
+  vertical-align: top;
+}
+
+button.hero-form-submit.button {
+  width: 100%;
+  max-width: 100%;
+  margin-top: 0.5rem;
+  padding-top: 0.85rem;
+  padding-bottom: 0.85rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.95rem;
+}
+
+.hero-below-form {
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(210, 199, 186, 0.65);
+  text-align: center;
+  max-width: min(26.5rem, 100%);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-below-form p {
+  margin: 0 0 0.65rem;
+  font-size: clamp(0.9rem, 1.1vw, 0.98rem);
+  line-height: 1.55;
+  color: var(--muted-text);
+}
+
+.hero-below-form p:first-child {
+  font-weight: 500;
+  color: var(--text);
+}
+
+.hero-below-form p:last-child {
+  margin-bottom: 0;
+}
+
+.fit-section {
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+}
+
+.fit-section-inner {
+  max-width: 40rem;
+}
+
+.fit-section h2 {
+  margin-bottom: 0.85rem;
+}
+
+.fit-section .bulleted {
+  margin-top: 0.25rem;
+}
+
+.hero-follow {
+  padding: 0 0 2.5rem;
+}
+
+.hero-follow-inner {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.1rem;
+  max-width: 40rem;
 }
 
 .eyebrow {
@@ -334,6 +520,15 @@ h3 {
   text-underline-offset: 3px;
 }
 
+.contact-crisis {
+  margin: 1.25rem 0 0;
+  padding-top: 0.85rem;
+  border-top: 1px solid rgba(210, 199, 186, 0.65);
+  font-size: 0.72rem;
+  line-height: 1.45;
+  color: #9ca3af;
+}
+
 .site-footer {
   padding: 1.8rem 0 2.2rem;
   border-top: 1px solid rgba(210, 199, 186, 0.9);
@@ -358,12 +553,16 @@ h3 {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .hero {
+  .hero:not(.hero--above-fold) {
     padding-top: 4.2rem;
   }
 
-  .hero-panel {
-    order: -1;
+  .hero--above-fold {
+    min-height: calc(100svh - 18rem);
+  }
+
+  .hero-follow-inner {
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .header-inner {
