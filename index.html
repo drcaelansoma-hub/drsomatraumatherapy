@@ -44,8 +44,60 @@
               A nervous system–based approach to trauma therapy that helps you process and move
               forward—without forcing yourself to “just think differently.”
             </p>
-            <div class="hero-actions">
-              <a href="mailto:drcaelansoma@gmail.com" class="button primary">Email to schedule a free consultation</a>
+            <!--
+              Submissions: opens the visitor’s email app with a pre-filled message to you.
+              To receive forms in your inbox without mailto, sign up at https://formspree.io,
+              create a form, then set <form action="https://formspree.io/f/YOUR_ID" method="POST">
+              and remove the submit handler in the script at the bottom of this page.
+            -->
+            <form id="hero-consult-form" class="hero-form" action="#" method="get">
+              <p class="hero-form-intro">
+                Start here if you’d like to schedule a free consultation.
+              </p>
+              <div class="form-field">
+                <label for="hero-consult-name">Name</label>
+                <input
+                  id="hero-consult-name"
+                  name="name"
+                  type="text"
+                  autocomplete="name"
+                  required
+                />
+              </div>
+              <div class="form-field">
+                <label for="hero-consult-email">Email</label>
+                <input
+                  id="hero-consult-email"
+                  name="email"
+                  type="email"
+                  autocomplete="email"
+                  inputmode="email"
+                  required
+                />
+              </div>
+              <div class="form-field">
+                <label for="hero-consult-message">Brief message</label>
+                <textarea
+                  id="hero-consult-message"
+                  name="message"
+                  rows="4"
+                  required
+                ></textarea>
+              </div>
+              <button type="submit" class="button primary hero-form-submit">
+                Schedule a Free Consultation
+              </button>
+            </form>
+
+            <div class="hero-below-form">
+              <p>You don’t have to push through or figure this out on your own.</p>
+              <p>
+                I’m Dr. Caelan Soma, a clinical psychologist specializing in trauma and
+                nervous system–based therapy.
+              </p>
+              <p>
+                Together, we work at a pace your body can handle—so change actually lasts.
+              </p>
             </div>
           </div>
         </div>
@@ -90,6 +142,22 @@
               This is a specialized trauma practice with a limited number of clients at a time in
               order to provide thoughtful, focused care.
             </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="good-fit" class="section fit-section" aria-labelledby="good-fit-heading">
+        <div class="container">
+          <div class="fit-section-inner">
+            <h2 id="good-fit-heading">This may be a good fit if:</h2>
+            <ul class="bulleted">
+              <li>You’ve tried to “talk it through,” but still feel stuck</li>
+              <li>Your body reacts before your thoughts can catch up</li>
+              <li>You feel overwhelmed, shut down, or on edge without knowing why</li>
+              <li>
+                You want a different kind of therapy—one that works with your nervous system
+              </li>
+            </ul>
           </div>
         </div>
       </section>
@@ -316,6 +384,29 @@
       const yearSpan = document.getElementById("year");
       if (yearSpan) {
         yearSpan.textContent = new Date().getFullYear();
+      }
+
+      const consultForm = document.getElementById("hero-consult-form");
+      if (consultForm) {
+        consultForm.addEventListener("submit", function (e) {
+          e.preventDefault();
+          if (!consultForm.checkValidity()) {
+            consultForm.reportValidity();
+            return;
+          }
+
+          const name = document.getElementById("hero-consult-name").value.trim();
+          const email = document.getElementById("hero-consult-email").value.trim();
+          const message = document.getElementById("hero-consult-message").value.trim();
+
+          const subject = encodeURIComponent("Free consultation request");
+          const body = encodeURIComponent(
+            "Name: " + name + "\n" + "Email: " + email + "\n\n" + "Message:\n" + message
+          );
+
+          window.location.href =
+            "mailto:drcaelansoma@gmail.com?subject=" + subject + "&body=" + body;
+        });
       }
     </script>
   </body>
