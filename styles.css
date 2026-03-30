@@ -172,6 +172,15 @@ h3 {
   margin: 0 0 0.65rem;
 }
 
+.hero-affirm {
+  margin: 0 0 0.85rem;
+  font-size: clamp(0.95rem, 1.2vw, 1.05rem);
+  line-height: 1.55;
+  color: #5c6370;
+  text-align: center;
+  font-weight: 500;
+}
+
 .hero-trust {
   margin: 0 0 0.55rem;
   font-size: clamp(0.84rem, 1.08vw, 0.93rem);
@@ -345,6 +354,16 @@ button.hero-form-submit.button {
   box-shadow: 0 8px 22px rgba(21, 45, 75, 0.2);
 }
 
+.hero-form-button-note {
+  margin: 0.65rem 0 0;
+  padding: 0 0.35rem;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: #6d7480;
+  text-align: center;
+  font-weight: 400;
+}
+
 .hero-form-error {
   margin: 0.65rem 0 0;
   padding: 0 0.25rem;
@@ -352,23 +371,6 @@ button.hero-form-submit.button {
   line-height: 1.5;
   color: #9a4c4c;
   text-align: center;
-}
-
-.hero-form-footer-notes {
-  margin-top: 1rem;
-  padding: 0 0.2rem;
-}
-
-.hero-form-footer-notes .hero-form-reassurance {
-  margin: 0;
-  font-size: 0.76rem;
-  line-height: 1.52;
-  color: #6b7280;
-  font-weight: 400;
-}
-
-.hero-form-footer-notes .hero-form-reassurance + .hero-form-reassurance {
-  margin-top: 0.45rem;
 }
 
 .hero-form-success {
@@ -382,6 +384,37 @@ button.hero-form-submit.button {
 
 .hero-form-success[hidden] {
   display: none !important;
+}
+
+.hero-what-next {
+  margin-top: 1.75rem;
+  padding-top: 1.35rem;
+  border-top: 1px solid rgba(210, 199, 186, 0.55);
+  text-align: center;
+}
+
+.hero-form-success:not([hidden]) + .hero-what-next {
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+}
+
+.hero-what-next-title {
+  margin: 0 0 0.65rem;
+  font-size: 0.88rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  color: var(--text);
+}
+
+.hero-what-next-item {
+  margin: 0 0 0.45rem;
+  font-size: 0.84rem;
+  line-height: 1.55;
+  color: var(--muted-text);
+}
+
+.hero-what-next-item:last-child {
+  margin-bottom: 0;
 }
 
 .hero-form-success-title {
@@ -459,6 +492,34 @@ button.hero-form-submit.button {
 
 .fit-section .bulleted {
   margin-top: 0.25rem;
+}
+
+.hero-after-words {
+  padding: 2.5rem 0 2.75rem;
+  border-top: 1px solid rgba(210, 199, 186, 0.55);
+  background: rgba(253, 250, 245, 0.45);
+}
+
+.hero-after-words-inner {
+  max-width: 36rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.hero-after-words-inner p {
+  margin: 0 0 0.65rem;
+  font-size: clamp(0.95rem, 1.15vw, 1.06rem);
+  line-height: 1.6;
+  color: var(--muted-text);
+}
+
+.hero-after-words-inner p:first-child {
+  font-weight: 500;
+  color: var(--text);
+}
+
+.hero-after-words-inner p:last-child {
+  margin-bottom: 0;
 }
 
 .hero-follow {
@@ -584,6 +645,10 @@ button.hero-form-submit.button {
   grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.1fr);
   gap: 2.4rem;
   align-items: flex-start;
+}
+
+#about .two-column > div:first-child p + p {
+  margin-top: 0.85rem;
 }
 
 .summary-card,
@@ -738,6 +803,12 @@ button.hero-form-submit.button {
 
   .hero--above-fold .hero-body {
     margin-bottom: 0.6rem;
+  }
+
+  .hero-affirm {
+    margin-bottom: 0.75rem;
+    padding: 0 0.2rem;
+    font-size: 0.94rem;
   }
 
   .hero-trust {
